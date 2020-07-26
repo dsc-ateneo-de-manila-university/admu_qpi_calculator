@@ -1,42 +1,5 @@
 import 'package:flutter/material.dart';
 
-class FormApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Form Page',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new FormPage(title: 'Form Page'),
-    );
-  }
-}
-
-class FormPage extends StatefulWidget {
-  FormPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _FormPageState createState() => new _FormPageState();
-}
-
-class _FormPageState extends State<FormPage> {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-      ),
-      body: new Container(
-          padding: new EdgeInsets.fromLTRB(40, 0, 40, 0),
-          child: new DataForm()),
-    );
-  }
-}
-
 class DataForm extends StatefulWidget {
   @override
   _DataFormState createState() => new _DataFormState();
@@ -113,12 +76,20 @@ class _DataFormState extends State<DataForm> {
     ));
 
     formWidget.add(new Container(
-      width: 350.0,
-      height: 300.0,
       child: Column(
         children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0, 20 , 0 , 0),
+              child: Text(
+                'Grade',
+                style: TextStyle(fontSize: 16, color: Colors.grey[600] ),
+                ),
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Container(
                 child: Text(
               myLetterGrade,
@@ -126,7 +97,7 @@ class _DataFormState extends State<DataForm> {
             )),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(10, 10 , 10, 30),
             child: Container(
               child: Slider(
                   min: 0.0,
