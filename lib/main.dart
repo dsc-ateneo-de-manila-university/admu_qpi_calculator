@@ -3,7 +3,6 @@ import 'package:admu_qpi_calculator/screens/home.dart';
 import 'package:admu_qpi_calculator/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:admu_qpi_calculator/screens/form.dart';
-
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -52,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
             height: MediaQuery.of(context).size.height * 0.885,
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(50.0),
+                padding: const EdgeInsets.fromLTRB(40 , 40 , 40, 40),
                 child: DataForm(),
               ),
             ),

@@ -10,25 +10,43 @@ class _DataFormState extends State<DataForm> {
 
   String _coursename = '';
   String _code = '';
-  int _units = -1;
+  int _units = 0;
   var myLetterGrade = "W";
   var sliderValue = 0.0;
   double _grade = -1;
+  String _dropdownlabel = "Units";
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey we created above
-    return Form(
-        key: _formKey,
-        child: new ListView(
-          children: getFormWidget(),
-        ));
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Form(
+          key: _formKey,
+          child: new ListView(
+            children: getFormWidget(),
+          )),
+    );
   }
 
   List<Widget> getFormWidget() {
     List<Widget> formWidget = new List();
 
+    formWidget.add(new Container(
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      child: Text(
+        'Course Data Form',
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.italic),
+      ),
+    ));
+
     formWidget.add(new TextFormField(
+      autofocus: true,
       decoration: InputDecoration(labelText: 'Course Name', hintText: 'Course'),
       validator: (value) {
         if (value.isEmpty) {
@@ -43,36 +61,60 @@ class _DataFormState extends State<DataForm> {
       },
     ));
 
-    formWidget.add(new TextFormField(
-      decoration: InputDecoration(labelText: 'Course Code', hintText: 'Code'),
-      validator: (value) {
-        if (value.isEmpty) {
-          return 'Please enter a Course Code';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        setState(() {
-          _code = value;
-        });
-      },
-    ));
-
-    formWidget.add(new TextFormField(
-      decoration: InputDecoration(
-          hintText: 'No. of Units', labelText: 'Enter Number of Units'),
-      keyboardType: TextInputType.number,
-      validator: (value) {
-        if (value.isEmpty)
-          return 'Please enter a value';
-        else
-          return null;
-      },
-      onSaved: (value) {
-        setState(() {
-          _units = int.tryParse(value);
-        });
-      },
+    formWidget.add(new Row(
+      children: [
+        Container(
+          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+          width: MediaQuery.of(context).size.width / 3,
+          child: TextFormField(
+            decoration:
+                InputDecoration(labelText: 'Course Code', hintText: 'Code'),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter a Course Code';
+              }
+              return null;
+            },
+            onSaved: (value) {
+              setState(() {
+                _code = value;
+              });
+            },
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+          width: MediaQuery.of(context).size.width / 2.5,
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(70, 20, 0, 0),
+                height: 80,
+                child: DropdownButton(
+                  hint: Text(
+                    _dropdownlabel,
+                    style: TextStyle(fontSize: 17, color: Colors.grey[600]),
+                  ),
+                  items: [
+                    DropdownMenuItem(child: Text("1"), value: 1,),
+                    DropdownMenuItem(child: Text("2"), value: 2),
+                    DropdownMenuItem(child: Text("3"), value: 3),
+                    DropdownMenuItem(child: Text("4"), value: 4),
+                    DropdownMenuItem(child: Text("5"), value: 5),
+                    DropdownMenuItem(child: Text("6"), value: 6)
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _units = value;
+                      _dropdownlabel = _units.toString();
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     ));
 
     formWidget.add(new Container(
@@ -81,11 +123,11 @@ class _DataFormState extends State<DataForm> {
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
-              padding: EdgeInsets.fromLTRB(0, 20 , 0 , 0),
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Text(
                 'Grade',
-                style: TextStyle(fontSize: 16, color: Colors.grey[600] ),
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              ),
             ),
           ),
           Padding(
@@ -97,7 +139,7 @@ class _DataFormState extends State<DataForm> {
             )),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10 , 10, 30),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 30),
             child: Container(
               child: Slider(
                   min: 0.0,
@@ -105,7 +147,7 @@ class _DataFormState extends State<DataForm> {
                   divisions: 8,
                   value: sliderValue,
                   activeColor: Colors.blue,
-                  inactiveColor: Colors.blueGrey,
+                  inactiveColor: Colors.grey,
                   onChanged: (newValue) {
                     setState(() {
                       sliderValue = newValue;
@@ -154,15 +196,14 @@ class _DataFormState extends State<DataForm> {
         arr[2] = _units;
         arr[3] = _grade;
         arr[4] = myLetterGrade;
-        Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text('Submitted Successfully')));
+        print('form submitted');
       }
     }
 
-    formWidget.add(new RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
-        child: new Text('Submit'),
+    formWidget.add(new FloatingActionButton(
+        child: new Icon(Icons.check),
+        backgroundColor: Colors.green,
+        elevation: 2.0,
         onPressed: onPressedSubmit));
 
     return formWidget;
