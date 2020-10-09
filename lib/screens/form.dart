@@ -252,7 +252,7 @@ class _DataFormState extends State<DataForm> {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(colors: [Colors.blue[100], Colors.blue]),
+                // gradient: LinearGradient(color: [Colors.blue[100], Colors.blue]),
               ),
               height: 50,
             ),
