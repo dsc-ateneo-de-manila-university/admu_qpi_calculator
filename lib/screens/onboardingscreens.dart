@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Onboarding2 extends StatefulWidget {
-  Onboarding2({Key key}) : super(key: key);
+class OnboardingScreen extends StatefulWidget {
+  OnboardingScreen({Key key}) : super(key: key);
 
   @override
-  _Onboarding2State createState() => _Onboarding2State();
+  _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
-class _Onboarding2State extends State<Onboarding2> {
+class _OnboardingScreenState extends State<OnboardingScreen> {
   // LISTS FOR ONBOARDING COMPONENTS
 
-  var onboardingIndex = 0;
+  int onboardingIndex = 0;
   List<String> imageList = [
     'assets/onboarding1.png',
     'assets/onboarding2.png',

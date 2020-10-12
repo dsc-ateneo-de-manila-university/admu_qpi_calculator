@@ -1,8 +1,8 @@
-import 'package:admu_qpi_calculator/screens/onboarding-2.dart';
+import 'package:admu_qpi_calculator/screens/onboardingscreens.dart';
 import 'package:flutter/material.dart';
-import 'mainscreen.dart';
+import 'screens/main.dart';
 
-void main() => runApp(MaterialApp(home: Onboarding2()));
+void main() => runApp(MaterialApp(home: OnboardingScreen()));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0;
+  int selectedPageIndex = 0;
 
   var pages = [HomeScreen(), SettingsScreen()];
 
